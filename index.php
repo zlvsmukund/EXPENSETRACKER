@@ -132,6 +132,9 @@ if ($connectionError === '' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $amount = trim($_POST['amount'] ?? '');
         $category = trim($_POST['category'] ?? '');
         $description = trim($_POST['description'] ?? '');
+        if($description !=='' && !preg_match("/^[A-Za-z\s]+$/", $description)){
+            $errors[] = 'Should contain Alphabets';
+        }
         $expenseDate = trim($_POST['expense_date'] ?? '');
 
         if ($amount === '' || !is_numeric($amount) || (float)$amount <= 0) {
